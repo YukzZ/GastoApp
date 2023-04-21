@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gastos_app/counter/counter.dart';
+import 'package:gastos_app/app/modules/home/home_page.dart';
 import 'package:gastos_app/l10n/l10n.dart';
 
 class App extends StatelessWidget {
@@ -8,15 +8,12 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        appBarTheme: const AppBarTheme(color: Color(0xFF13B9FF)),
-        colorScheme: ColorScheme.fromSwatch(
-          accentColor: const Color(0xFF13B9FF),
-        ),
+      theme: ThemeData.dark(
+        
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
+      home: const HomePage(),
     );
   }
 }
