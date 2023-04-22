@@ -49,6 +49,7 @@ class CustomCard extends StatelessWidget {
             iconPath,
             width: 32,
             height: 32,
+            color: Colors.white,
           ),
           const SizedBox(height: 16),
           Text(

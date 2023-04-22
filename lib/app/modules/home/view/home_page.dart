@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gastos_app/widgets/custom_button.dart';
 import 'package:gastos_app/widgets/custom_card.dart';
 
@@ -31,6 +32,33 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ],
+        ),
+      ),
+      bottomNavigationBar: Card(
+        child: SizedBox(
+          height: 100,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+            SvgPicture.asset(
+              'assets/icons/money.svg',
+              width: 32,
+              height: 32,
+              color: Colors.white,
+            ),
+            SvgPicture.asset(
+              'assets/icons/money.svg',
+              width: 32,
+              height: 32,
+              color: Colors.white,
+            ),
+            SvgPicture.asset(
+              'assets/icons/money.svg',
+              width: 32,
+              height: 32,
+              color: Colors.white,
+            ),
+          ],),
         ),
       ),
     );

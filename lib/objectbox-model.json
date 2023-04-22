@@ -1,0 +1,57 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:4104996196160142625",
+      "lastPropertyId": "6:8925070702863642642",
+      "name": "GastoModel",
+      "properties": [
+        {
+          "id": "1:2859077283631563039",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:7208498870002418812",
+          "name": "nombreGasto",
+          "type": 9
+        },
+        {
+          "id": "3:5403876232334322867",
+          "name": "descripcionGasto",
+          "type": 9
+        },
+        {
+          "id": "4:1297030238003407958",
+          "name": "cantidadGasto",
+          "type": 6
+        },
+        {
+          "id": "5:5910646345707319900",
+          "name": "categoriaGasto",
+          "type": 9
+        },
+        {
+          "id": "6:8925070702863642642",
+          "name": "fechaGasto",
+          "type": 9
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "1:4104996196160142625",
+  "lastIndexId": "0:0",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}
