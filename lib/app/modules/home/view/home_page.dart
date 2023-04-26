@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gastos_app/app/modules/gasto/gasto_page.dart';
 import 'package:gastos_app/widgets/custom_button.dart';
 import 'package:gastos_app/widgets/custom_card.dart';
 
@@ -28,7 +29,14 @@ class _HomePageState extends State<HomePage> {
               title: 'Ejemplo Titulo',               
               iconPath: 'assets/icons/money.svg', 
               children: [
-                CustomButton(onPressed: (){}, label: 'Aceptar'),
+                CustomButton(onPressed: ()async{
+                  await Navigator.push(
+                    context, 
+                    MaterialPageRoute<void>(
+                      builder: (context) => const GastoPage(),
+                    ),
+                  );
+                }, label: 'Aceptar',),
               ],
             ),
           ],
