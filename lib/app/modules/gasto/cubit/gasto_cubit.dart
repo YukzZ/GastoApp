@@ -32,6 +32,12 @@ class GastoCubit extends Cubit<GastoState> {
     await getAll();
   }
 
+  Future<void> getByCategoria({required String categoriaGasto})async{
+    final gasto = GastoController().getByCategoria(categoriaGasto);
+    emit(state.copyWith(gastoModel: gasto));
+    await getAll();
+  }
+
   Future<void> save({
     required String nombreGasto,
     required String descripcionGasto,

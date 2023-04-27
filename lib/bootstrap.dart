@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
+import 'package:gastos_app/core/data_base_controller.dart';
 
 class AppBlocObserver extends BlocObserver {
   const AppBlocObserver();
@@ -28,7 +29,14 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   Bloc.observer = const AppBlocObserver();
 
   await runZonedGuarded(
-    () async => runApp(await builder()),
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
+      await DataBaseController().initDataBase();
+      await BlocOverrides.runZoned(
+        () async => runApp(await builder()),
+        blocObserver: AppBlocObserver(),
+      );
+    },
     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
   );
 }
