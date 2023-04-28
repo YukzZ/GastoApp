@@ -5,6 +5,7 @@ import 'package:gastos_app/app/modules/gasto/cubit/gasto_cubit.dart';
 import 'package:gastos_app/app/modules/gasto/view/detalle_gasto_page.dart';
 import 'package:gastos_app/data/models/gasto_model.dart';
 import 'package:gastos_app/widgets/custom_button.dart';
+import 'package:intl/intl.dart';
 
 class GastoPage extends StatefulWidget {
   const GastoPage({super.key, required this.categoriaGasto,});
@@ -16,6 +17,7 @@ class GastoPage extends StatefulWidget {
 }
 
 class _GastoPageState extends State<GastoPage> {
+  late DateTime _selectedDate;
   late GastoCubit cubit;
   @override
   Widget build(BuildContext context) {
@@ -140,6 +142,15 @@ class _GastoPageState extends State<GastoPage> {
           controller: controllerFechaGasto,
           keyboardType: TextInputType.datetime,
         ),
+        ListTile(
+                    title: const Text('Seleccionar fecha'),
+                    subtitle: _selectedDate == null
+                        ? const Text('Seleccione una fecha')
+                        : Text(DateFormat.yMd().format(_selectedDate)),
+                    onTap: () {
+                      _selectDate(context);
+                    },
+                  ),
         const SizedBox(height: 20,),
         CustomButton(
           onPressed: (){
@@ -197,6 +208,7 @@ class _GastoPageState extends State<GastoPage> {
                     ),
                     
                   ),
+                  
                 ],
               ),
             ),
@@ -204,5 +216,25 @@ class _GastoPageState extends State<GastoPage> {
         );
       },
     );
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final selected = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2021),
+      lastDate: DateTime(2025),
+    );
+
+    if (selected != null) {
+      setState(() {
+        _selectedDate = selected;
+      });
+
+      // Aquí puedes hacer lo que quieras con la fecha seleccionada,
+      // como imprimirla en la consola o enviarla a un servidor.
+      final formattedDate = DateFormat.yMd().format(_selectedDate);
+      print('El usuario seleccionó la fecha $formattedDate');
+    }
   }
 }
