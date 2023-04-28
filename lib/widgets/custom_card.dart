@@ -21,7 +21,7 @@ class CustomCard extends StatelessWidget {
       context,
     );
     final backgroundColor = CupertinoDynamicColor.resolve(
-      CupertinoColors.systemGrey6,
+      const Color.fromARGB(255, 119, 136, 153),
       context,
     );
     final dividerColor = CupertinoDynamicColor.resolve(
@@ -43,7 +43,6 @@ class CustomCard extends StatelessWidget {
         ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SvgPicture.asset(
             iconPath,

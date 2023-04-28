@@ -21,10 +21,11 @@ class GastoController{
     return id > 0;
   }
 
-  GastoModel? getByCategoria(String categoriaGasto){
+  List<GastoModel>? getByCategoria(String categoriaGasto){
     final box = DataBaseController.store.box<GastoModel>();
     final query = box.query(GastoModel_.categoriaGasto.equals(categoriaGasto)).build();
     final result = query.find();
     query.close();
+    return result;
   }
 }

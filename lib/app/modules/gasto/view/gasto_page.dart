@@ -7,7 +7,9 @@ import 'package:gastos_app/data/models/gasto_model.dart';
 import 'package:gastos_app/widgets/custom_button.dart';
 
 class GastoPage extends StatefulWidget {
-  const GastoPage({super.key});
+  const GastoPage({super.key, required this.categoriaGasto,});
+
+  final String categoriaGasto;
 
   @override
   State<GastoPage> createState() => _GastoPageState();
@@ -22,13 +24,23 @@ class _GastoPageState extends State<GastoPage> {
         title: const Text('Gasto Monetario'),
       ),
       body: BlocProvider(
-        create: (context) => GastoCubit()..getAll(),
+        create: (context) => GastoCubit()..getByCategoria(
+          categoriaGasto: widget.categoriaGasto,
+        ),
         child: BlocBuilder<GastoCubit, GastoState>(
           builder: (context, state) {
             cubit = context.read<GastoCubit>();
             Widget widgetEstatus = const Center(child: Text('No hay datos'),);
             if(state.status == GastoEstatus.success){
-              widgetEstatus = listGastos(lsGastos: state.lsGastos);
+              final lsGastos = state.lsGastos;
+              for(final gasto in lsGastos){
+                final lsNewGastos = <GastoModel>[];
+                if(gasto.categoriaGasto == widget.categoriaGasto){
+                  lsNewGastos.add(gasto);
+                  widgetEstatus = listGastos(lsGastos: lsNewGastos);
+
+                }
+              }
             }else if(state.status == GastoEstatus.loading){
               widgetEstatus = const Center(child: CircularProgressIndicator());
             }else if(state.status == GastoEstatus.failure){
@@ -43,6 +55,7 @@ class _GastoPageState extends State<GastoPage> {
                     const SizedBox(
                       height: 10,
                     ),
+                    Text('Nuevo gasto en categoria ${widget.categoriaGasto}'),
                     Card(
                       color: Colors.blueGrey,
                       child: Padding(
@@ -119,12 +132,7 @@ class _GastoPageState extends State<GastoPage> {
             cantidad = int.parse(value);
           },
         ),
-        TextFormField(
-          decoration: const InputDecoration(
-            labelText: 'Categoria del Gasto',
-          ),
-          controller: controllerCategoriaGasto,
-        ),
+        
         TextFormField(
           decoration: const InputDecoration(
             labelText: 'Fecha del Gasto',
@@ -139,7 +147,7 @@ class _GastoPageState extends State<GastoPage> {
               nombreGasto: controllerNombreGasto.text, 
               descripcionGasto: controllerDescripcionGasto.text, 
               cantidadGasto: cantidad, 
-              categoriaGasto: controllerCategoriaGasto.text, 
+              categoriaGasto: widget.categoriaGasto, 
               fechaGasto: controllerFechaGasto.text,
             );
             controllerNombreGasto.clear();
