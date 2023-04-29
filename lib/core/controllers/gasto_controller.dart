@@ -23,7 +23,9 @@ class GastoController{
 
   List<GastoModel>? getByCategoria(String categoriaGasto){
     final box = DataBaseController.store.box<GastoModel>();
-    final query = box.query(GastoModel_.categoriaGasto.equals(categoriaGasto)).build();
+    final query = box.query(
+      GastoModel_.categoriaGasto.equals(categoriaGasto),
+    ).build();
     final result = query.find();
     query.close();
     return result;

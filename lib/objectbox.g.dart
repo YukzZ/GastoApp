@@ -15,6 +15,7 @@ import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
 import 'data/models/gasto_model.dart';
+import 'data/models/ingreso_model.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
@@ -57,6 +58,25 @@ final _entities = <ModelEntity>[
             flags: 0)
       ],
       relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(2, 8993831429029827469),
+      name: 'IngresoModel',
+      lastPropertyId: const IdUid(2, 1874701551986106780),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 2335697738196960826),
+            name: 'id',
+            type: 6,
+            flags: 129),
+        ModelProperty(
+            id: const IdUid(2, 1874701551986106780),
+            name: 'ingreso',
+            type: 6,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
@@ -80,7 +100,7 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(1, 4104996196160142625),
+      lastEntityId: const IdUid(2, 8993831429029827469),
       lastIndexId: const IdUid(0, 0),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
@@ -135,6 +155,32 @@ ModelDefinition getObjectBoxModel() {
                   .vTableGet(buffer, rootOffset, 14, ''));
 
           return object;
+        }),
+    IngresoModel: EntityDefinition<IngresoModel>(
+        model: _entities[1],
+        toOneRelations: (IngresoModel object) => [],
+        toManyRelations: (IngresoModel object) => {},
+        getId: (IngresoModel object) => object.id,
+        setId: (IngresoModel object, int id) {
+          object.id = id;
+        },
+        objectToFB: (IngresoModel object, fb.Builder fbb) {
+          fbb.startTable(3);
+          fbb.addInt64(0, object.id);
+          fbb.addInt64(1, object.ingreso);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+
+          final object = IngresoModel(
+              id: const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0),
+              ingreso:
+                  const fb.Int64Reader().vTableGet(buffer, rootOffset, 6, 0));
+
+          return object;
         })
   };
 
@@ -166,4 +212,15 @@ class GastoModel_ {
   /// see [GastoModel.fechaGasto]
   static final fechaGasto =
       QueryStringProperty<GastoModel>(_entities[0].properties[5]);
+}
+
+/// [IngresoModel] entity fields to define ObjectBox queries.
+class IngresoModel_ {
+  /// see [IngresoModel.id]
+  static final id =
+      QueryIntegerProperty<IngresoModel>(_entities[1].properties[0]);
+
+  /// see [IngresoModel.ingreso]
+  static final ingreso =
+      QueryIntegerProperty<IngresoModel>(_entities[1].properties[1]);
 }

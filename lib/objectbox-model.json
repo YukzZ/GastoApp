@@ -41,9 +41,28 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "2:8993831429029827469",
+      "lastPropertyId": "2:1874701551986106780",
+      "name": "IngresoModel",
+      "properties": [
+        {
+          "id": "1:2335697738196960826",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:1874701551986106780",
+          "name": "ingreso",
+          "type": 6
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "1:4104996196160142625",
+  "lastEntityId": "2:8993831429029827469",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

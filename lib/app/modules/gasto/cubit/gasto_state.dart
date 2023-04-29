@@ -27,6 +27,6 @@ class GastoState extends Equatable {
   List<Object> get props => [status];
 }
 
-enum GastoEstatus { none, loading, success, failure, saveOk, saveError, }
+enum GastoEstatus { none, loading, success, failure, saveOk, saveError, empty ,}
 
 
